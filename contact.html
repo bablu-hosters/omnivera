@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Omnivera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0E1526;
+    --ink-2: #141D33;
+    --ink-3: #1B2540;
+    --paper: #F3EFE4;
+    --verdigris: #3FA37E;
+    --verdigris-dim: #2C7259;
+    --gold: #C9A227;
+    --slate: #8B93A7;
+    --line: rgba(243,239,228,0.12);
+    --line-strong: rgba(243,239,228,0.22);
+    --whatsapp: #25D366;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+  ::selection{ background: var(--verdigris); color: var(--ink); }
+  :focus-visible{ outline: 2px solid var(--verdigris); outline-offset: 3px; }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--verdigris);
+  }
+
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 500; margin: 0; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,21,38,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .brand{
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 15px; letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .brand-mark{ width: 26px; height: 26px; flex-shrink: 0; }
+  .nav-links{
+    display: flex; align-items: center; gap: 34px;
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-links a{
+    text-decoration: none;
+    font-size: 14.5px;
+    color: var(--slate);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover{ color: var(--paper); }
+  .nav-links a.active{ color: var(--paper); }
+  .nav-cta{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink) !important;
+    background: var(--verdigris);
+    padding: 10px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  .nav-cta:hover{ background: #56bb92; }
+  .nav-toggle{ display: none; }
+
+  /* ---------- PAGE HERO ---------- */
+  .page-hero{
+    position: relative;
+    padding: 88px 0 76px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero::before{
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(700px 420px at 82% -10%, rgba(63,163,126,0.16), transparent 60%),
+      radial-gradient(500px 300px at 8% 110%, rgba(201,162,39,0.09), transparent 60%);
+    pointer-events: none;
+  }
+  .page-hero-inner{ position: relative; max-width: 760px; }
+  .page-hero h1{
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-top: 14px;
+  }
+  .page-hero h1 em{ font-style: italic; color: var(--verdigris); }
+  .page-hero p.lede{
+    margin: 24px 0 0;
+    font-size: 17.5px;
+    color: var(--slate);
+    max-width: 56ch;
+  }
+
+  .strip{ border-bottom: 1px solid var(--line); background: var(--ink-2); }
+  .strip .wrap{
+    display: flex; flex-wrap: wrap; gap: 12px 40px;
+    padding: 20px 32px;
+    align-items: center; justify-content: space-between;
+  }
+  .strip-item{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--slate);
+    letter-spacing: 0.04em;
+  }
+  .strip-item.live{ color: var(--whatsapp); display: flex; align-items: center; gap: 7px; }
+  .live-dot{
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--whatsapp);
+    display: inline-block;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity: 1; box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+    50%{ opacity: 0.7; box-shadow: 0 0 0 5px rgba(37,211,102,0); }
+  }
+
+  section{ padding: 96px 0; }
+  .section-head{ max-width: 640px; margin-bottom: 56px; }
+  .section-head h2{
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin-top: 14px;
+    line-height: 1.15;
+  }
+  .section-head p{ margin-top: 16px; color: var(--slate); font-size: 16.5px; }
+
+  /* ---------- CONTACT CHANNELS ---------- */
+  .channels{ border-bottom: 1px solid var(--line); }
+  .channels-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .channel-card{
+    background: var(--ink);
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .channel-mark{ width: 30px; height: 30px; }
+  .channel-card h3{ font-size: 19px; margin-top: 18px; color: var(--paper); font-weight: 500; }
+  .channel-card p{ color: var(--slate); font-size: 14.5px; margin-top: 8px; flex-grow: 1; }
+  .channel-value{
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--paper);
+    margin-top: 16px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 3px;
+    width: fit-content;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .channel-value:hover{ color: var(--verdigris); border-color: var(--verdigris); }
+  .channel-card.whatsapp-card .channel-value{ color: var(--whatsapp); border-color: rgba(37,211,102,0.35); }
+  .channel-card.whatsapp-card .channel-value:hover{ color: #4be08a; border-color: #4be08a; }
+
+  /* ---------- FORM + WHATSAPP ---------- */
+  .contact-main{ border-bottom: 1px solid var(--line); background: var(--ink-2); }
+  .contact-grid{
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .form-panel{
+    background: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 34px;
+  }
+  .form-panel h3{ font-size: 21px; font-weight: 500; }
+  .form-panel > p{ color: var(--slate); font-size: 14.5px; margin-top: 10px; }
+  .field{ margin-top: 22px; }
+  .field label{
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--slate);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .field input,
+  .field textarea{
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    background: var(--ink-2);
+    border: 1px solid var(--line-strong);
+    color: var(--paper);
+    padding: 13px 14px;
+    border-radius: 3px;
+    resize: vertical;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder{ color: #5C6478; }
+  .field textarea{ min-height: 110px; }
+  .field-error{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--gold);
+    margin-top: 6px;
+    min-height: 14px;
+  }
+  .whatsapp-submit{
+    margin-top: 28px;
+    width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    background: var(--whatsapp);
+    color: #08210F;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .whatsapp-submit:hover{ background: #33e072; transform: translateY(-1px); }
+  .whatsapp-submit svg{ width: 18px; height: 18px; flex-shrink: 0; }
+  .form-note{
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--slate);
+    text-align: center;
+  }
+
+  /* Side panel: direct whatsapp + preview */
+  .side-panel{ display: flex; flex-direction: column; gap: 22px; }
+  .quick-card{
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 26px;
+    background: linear-gradient(155deg, var(--ink-3), var(--ink));
+  }
+  .quick-card .eyebrow{ color: var(--whatsapp); }
+  .quick-card h3{ font-size: 19px; margin-top: 12px; font-weight: 500; }
+  .quick-card p{ color: var(--slate); font-size: 14px; margin-top: 8px; }
+  .quick-btn{
+    margin-top: 18px;
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--whatsapp);
+    text-decoration: none;
+    border: 1px solid rgba(37,211,102,0.4);
+    padding: 11px 16px;
+    border-radius: 3px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .quick-btn:hover{ background: var(--whatsapp); color: #08210F; }
+  .quick-btn svg{ width: 16px; height: 16px; }
+
+  .preview-card{
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .preview-card .eyebrow{ color: var(--slate); }
+  .preview-bubble{
+    margin-top: 14px;
+    background: #DCF8C6;
+    color: #0B1A0F;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    position: relative;
+    min-height: 20px;
+  }
+  .preview-bubble .ph{ color: #5c7a5f; }
+  .preview-time{
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--slate);
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{ border-top: 1px solid var(--line-strong); max-width: 820px; }
+  .faq-item{ border-bottom: 1px solid var(--line-strong); padding: 22px 0; }
+  .faq-item h3{ font-size: 16.5px; font-weight: 500; }
+  .faq-item p{ color: var(--slate); font-size: 14.5px; margin-top: 8px; }
+
+  /* ---------- CTA ---------- */
+  .cta{ border-top: 1px solid var(--line); text-align: center; }
+  .cta h2{ font-size: clamp(30px, 4vw, 46px); max-width: 18ch; margin: 0 auto; line-height: 1.12; }
+  .cta p{ color: var(--slate); margin-top: 18px; }
+  .cta-actions{ margin-top: 32px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s ease, background 0.2s ease;
+  }
+  .btn-primary:hover{ background: #fff; transform: translateY(-1px); }
+  .btn-ghost{
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--slate);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    align-self: center;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover{ color: var(--paper); border-color: var(--paper); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top: 1px solid var(--line); padding: 44px 0; }
+  .footer-grid{ display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+  .footer-brand{ font-family: var(--font-mono); font-size: 13.5px; color: var(--slate); }
+  .footer-links{ display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: 13.5px; }
+  .footer-links a{ color: var(--slate); text-decoration: none; }
+  .footer-links a:hover{ color: var(--paper); }
+  .footer-meta{ font-family: var(--font-mono); font-size: 12px; color: #5C6478; margin-top: 26px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .channels-grid{ grid-template-columns: 1fr; }
+    .contact-grid{ grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 640px){
+    .nav-links{
+      position: fixed; inset: 62px 0 auto 0;
+      background: var(--ink);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 32px 26px;
+      border-bottom: 1px solid var(--line);
+      display: none;
+      gap: 18px;
+    }
+    .nav-links.open{ display: flex; }
+    .nav-toggle{
+      display: inline-flex;
+      background: none; border: none; color: var(--paper);
+      font-family: var(--font-mono); font-size: 13px;
+      cursor: pointer;
+    }
+    .form-panel{ padding: 24px; }
+    .footer-grid{ flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#3FA37E" stroke-width="1.6"/>
+        <path d="M12 20.5 L17.5 26 L28.5 14" fill="none" stroke="#3FA37E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      OMNIVERA
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#platform">Platform</a></li>
+      <li><a href="index.html#pipeline">How it works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Request access</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="wrap page-hero-inner">
+      <p class="eyebrow">Contact Omnivera Pvt Ltd</p>
+      <h1>Tell us what your systems <em>disagree</em> on.</h1>
+      <p class="lede">Fill in the form and it opens straight into WhatsApp with your message ready to send — or message us directly using the details below.</p>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span class="strip-item live"><span class="live-dot"></span>WHATSAPP: +91 93907 89610</span>
+      <span class="strip-item">RESPONSE TIME: UNDER 1 BUSINESS DAY</span>
+      <span class="strip-item">HYDERABAD, INDIA</span>
+    </div>
+  </div>
+
+  <!-- CHANNELS -->
+  <section class="channels">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Reach us</p>
+        <h2>Three ways to get a verified answer.</h2>
+      </div>
+      <div class="channels-grid">
+        <div class="channel-card whatsapp-card">
+          <svg class="channel-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#25D366" stroke-width="1.4"/>
+            <path d="M11 21l0.9-3.3a5.6 5.6 0 1 1 2.2 2.1L11 21z" stroke="#25D366" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+          <h3>WhatsApp</h3>
+          <p>Fastest way to reach the team directly — usually same-day during business hours.</p>
+          <a class="channel-value" href="https://wa.me/919390789610?text=Hi%20Omnivera%2C%20I%27d%20like%20to%20know%20more%20about%20the%20platform." target="_blank" rel="noopener">+91 93907 89610</a>
+        </div>
+        <div class="channel-card">
+          <svg class="channel-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <path d="M9 12l7 5 7-5" stroke="#3FA37E" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="9" y="10" width="14" height="12" rx="1.4" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+          </svg>
+          <h3>Email</h3>
+          <p>For anything that needs detail — proposals, security questionnaires, partnerships.</p>
+          <a class="channel-value" href="mailto:hello@omnivera.com">hello@omnivera.com</a>
+        </div>
+        <div class="channel-card">
+          <svg class="channel-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <path d="M16 9c-2.8 0-5 2.1-5 4.9 0 3.6 5 9.1 5 9.1s5-5.5 5-9.1c0-2.8-2.2-4.9-5-4.9z" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <circle cx="16" cy="13.8" r="1.6" fill="#3FA37E"/>
+          </svg>
+          <h3>Office</h3>
+          <p>Hyderabad, Telangana — visits by appointment only for now.</p>
+          <span class="channel-value" style="cursor:default;">Hyderabad, India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM + WHATSAPP -->
+  <section class="contact-main">
+    <div class="wrap contact-grid">
+      <div class="form-panel">
+        <p class="eyebrow">Send a message</p>
+        <h3 style="margin-top:14px;">We'll open WhatsApp with this ready to go</h3>
+        <p>Fill in the fields — nothing is sent from this page directly. Submitting opens WhatsApp on +91 93907 89610 with your message pre-filled, so you just hit send.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="field">
+            <label for="cName">Name</label>
+            <input type="text" id="cName" placeholder="Your full name" required>
+            <div class="field-error" id="err-cName"></div>
+          </div>
+          <div class="field">
+            <label for="cPhone">Phone / WhatsApp number</label>
+            <input type="tel" id="cPhone" placeholder="+91 90000 00000" required>
+            <div class="field-error" id="err-cPhone"></div>
+          </div>
+          <div class="field">
+            <label for="cCompany">Company (optional)</label>
+            <input type="text" id="cCompany" placeholder="Where you work">
+          </div>
+          <div class="field">
+            <label for="cMessage">Message</label>
+            <textarea id="cMessage" placeholder="What would you like to know?" required></textarea>
+            <div class="field-error" id="err-cMessage"></div>
+          </div>
+
+          <button type="submit" class="whatsapp-submit">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M11 21l0.9-3.3a5.6 5.6 0 1 1 2.2 2.1L11 21z" stroke="#08210F" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            Continue on WhatsApp
+          </button>
+          <p class="form-note">Opens WhatsApp in a new tab, addressed to +91 93907 89610</p>
+        </form>
+      </div>
+
+      <div class="side-panel">
+        <div class="quick-card">
+          <p class="eyebrow">Prefer to skip the form?</p>
+          <h3>Message us directly</h3>
+          <p>Open a chat right now — no details required.</p>
+          <a class="quick-btn" href="https://wa.me/919390789610" target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M11 21l0.9-3.3a5.6 5.6 0 1 1 2.2 2.1L11 21z" stroke="#25D366" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+
+        <div class="preview-card">
+          <p class="eyebrow">Message preview</p>
+          <div class="preview-bubble" id="previewBubble">
+            <span class="ph">Your message will appear here as you type…</span>
+          </div>
+          <div class="preview-time">This is exactly what gets sent to WhatsApp</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Before you write in</p>
+        <h2>Quick answers.</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Does the form send anything on its own?</h3>
+          <p>No. It only builds a WhatsApp message and hands it off to WhatsApp — nothing leaves this page until you press send inside WhatsApp yourself.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Do I need WhatsApp installed?</h3>
+          <p>On mobile it opens the app if installed, otherwise WhatsApp Web in your browser. Either way, no account details are shared with us until you send the message.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What if I'd rather email?</h3>
+          <p>hello@omnivera.com works too — use it for anything that needs attachments, like security questionnaires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>Most questions get answered same day.</h2>
+      <p>Reach out however's easiest — we read every channel.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/919390789610" target="_blank" rel="noopener" class="btn-primary">Message us on WhatsApp</a>
+        <a href="index.html#contact" class="btn-ghost">Request early access instead</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">OMNIVERA PVT LTD<br>Operational truth, verified.</div>
+      <ul class="footer-links">
+        <li><a href="index.html#platform">Platform</a></li>
+        <li><a href="index.html#pipeline">How it works</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">© <span id="year"></span> Omnivera Pvt Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav toggle
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // ---- WhatsApp contact form ----
+  var WHATSAPP_NUMBER = '919390789610'; // country code 91 + number, no + or spaces
+
+  var form = document.getElementById('contactForm');
+  var nameEl = document.getElementById('cName');
+  var phoneEl = document.getElementById('cPhone');
+  var companyEl = document.getElementById('cCompany');
+  var messageEl = document.getElementById('cMessage');
+  var previewBubble = document.getElementById('previewBubble');
+
+  function buildMessage(){
+    var name = nameEl.value.trim();
+    var phone = phoneEl.value.trim();
+    var company = companyEl.value.trim();
+    var message = messageEl.value.trim();
+
+    var lines = [];
+    lines.push('Hi Omnivera, I\'m reaching out from the website.');
+    if(name) lines.push('Name: ' + name);
+    if(company) lines.push('Company: ' + company);
+    if(phone) lines.push('Phone: ' + phone);
+    if(message) lines.push('Message: ' + message);
+    return lines.join('\n');
+  }
+
+  function updatePreview(){
+    var text = buildMessage();
+    var hasContent = nameEl.value.trim() || phoneEl.value.trim() || companyEl.value.trim() || messageEl.value.trim();
+    if(hasContent){
+      previewBubble.textContent = text;
+    } else {
+      previewBubble.innerHTML = '<span class="ph">Your message will appear here as you type…</span>';
+    }
+  }
+  [nameEl, phoneEl, companyEl, messageEl].forEach(function(el){
+    el.addEventListener('input', updatePreview);
+  });
+
+  function setError(id, msg){
+    document.getElementById('err-' + id).textContent = msg || '';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var valid = true;
+
+    if(!nameEl.value.trim()){
+      setError('cName', 'Please enter your name.');
+      valid = false;
+    } else { setError('cName', ''); }
+
+    var phoneVal = phoneEl.value.trim();
+    if(!phoneVal){
+      setError('cPhone', 'Please enter a phone number.');
+      valid = false;
+    } else if(!/^[0-9+\s-]{7,15}$/.test(phoneVal)){
+      setError('cPhone', 'Enter a valid phone number.');
+      valid = false;
+    } else { setError('cPhone', ''); }
+
+    if(!messageEl.value.trim()){
+      setError('cMessage', 'Tell us what you need — a line is enough.');
+      valid = false;
+    } else { setError('cMessage', ''); }
+
+    if(!valid) return;
+
+    var text = encodeURIComponent(buildMessage());
+    var url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
+    window.open(url, '_blank', 'noopener');
+  });
+</script>
+
+</body>
+</html>

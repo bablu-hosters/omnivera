@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Omnivera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0E1526;
+    --ink-2: #141D33;
+    --ink-3: #1B2540;
+    --paper: #F3EFE4;
+    --verdigris: #3FA37E;
+    --verdigris-dim: #2C7259;
+    --gold: #C9A227;
+    --slate: #8B93A7;
+    --line: rgba(243,239,228,0.12);
+    --line-strong: rgba(243,239,228,0.22);
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+  ::selection{ background: var(--verdigris); color: var(--ink); }
+  :focus-visible{ outline: 2px solid var(--verdigris); outline-offset: 3px; }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--verdigris);
+  }
+
+  h1,h2,h3{ font-family: var(--font-display); font-weight: 500; margin: 0; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(14,21,38,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .brand{
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 15px; letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--paper);
+  }
+  .brand-mark{ width: 26px; height: 26px; flex-shrink: 0; }
+  .nav-links{
+    display: flex; align-items: center; gap: 34px;
+    list-style: none; margin: 0; padding: 0;
+  }
+  .nav-links a{
+    text-decoration: none;
+    font-size: 14.5px;
+    color: var(--slate);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover{ color: var(--paper); }
+  .nav-links a.active{ color: var(--paper); }
+  .nav-cta{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink) !important;
+    background: var(--verdigris);
+    padding: 10px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease;
+  }
+  .nav-cta:hover{ background: #56bb92; }
+  .nav-toggle{ display: none; }
+
+  /* ---------- PAGE HERO ---------- */
+  .page-hero{
+    position: relative;
+    padding: 88px 0 76px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-hero::before{
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(700px 420px at 82% -10%, rgba(63,163,126,0.16), transparent 60%),
+      radial-gradient(500px 300px at 8% 110%, rgba(201,162,39,0.09), transparent 60%);
+    pointer-events: none;
+  }
+  .page-hero-inner{ position: relative; max-width: 760px; }
+  .page-hero h1{
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-top: 14px;
+  }
+  .page-hero h1 em{ font-style: italic; color: var(--verdigris); }
+  .page-hero p.lede{
+    margin: 24px 0 0;
+    font-size: 17.5px;
+    color: var(--slate);
+    max-width: 56ch;
+  }
+
+  .strip{ border-bottom: 1px solid var(--line); background: var(--ink-2); }
+  .strip .wrap{
+    display: flex; flex-wrap: wrap; gap: 12px 40px;
+    padding: 20px 32px;
+    align-items: center; justify-content: space-between;
+  }
+  .strip-item{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--slate);
+    letter-spacing: 0.04em;
+  }
+
+  section{ padding: 96px 0; }
+  .section-head{ max-width: 640px; margin-bottom: 56px; }
+  .section-head h2{
+    font-size: clamp(28px, 3.4vw, 40px);
+    margin-top: 14px;
+    line-height: 1.15;
+  }
+  .section-head p{ margin-top: 16px; color: var(--slate); font-size: 16.5px; }
+
+  /* ---------- ORIGIN TIMELINE ---------- */
+  .origin{ border-bottom: 1px solid var(--line); }
+  .origin-grid{ display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; }
+  .origin-copy p{ color: var(--slate); font-size: 16px; margin-top: 16px; }
+  .timeline{ border-left: 1px solid var(--line-strong); padding-left: 34px; }
+  .timeline-item{ position: relative; padding-bottom: 40px; }
+  .timeline-item:last-child{ padding-bottom: 0; }
+  .timeline-item::before{
+    content: "";
+    position: absolute; left: -39.5px; top: 4px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--ink);
+    border: 1.6px solid var(--verdigris);
+  }
+  .timeline-item .when{
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--verdigris);
+    letter-spacing: 0.06em;
+  }
+  .timeline-item h3{ font-size: 19px; margin-top: 10px; font-weight: 500; }
+  .timeline-item p{ color: var(--slate); font-size: 14.5px; margin-top: 8px; max-width: 52ch; }
+
+  /* ---------- VALUES (seal-marked, not a sequence) ---------- */
+  .values-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .value-card{ background: var(--ink); padding: 34px 30px; }
+  .value-mark{ width: 30px; height: 30px; }
+  .value-card h3{ font-size: 19px; margin-top: 18px; color: var(--paper); font-weight: 500; }
+  .value-card p{ color: var(--slate); font-size: 14.5px; margin-top: 10px; }
+
+  /* ---------- TEAM ---------- */
+  .team{ border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ink-2); }
+  .team-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .team-card{ text-align: left; }
+  .avatar{
+    width: 100%; aspect-ratio: 4/5;
+    border-radius: 4px;
+    background: linear-gradient(155deg, var(--ink-3), var(--ink));
+    border: 1px solid var(--line-strong);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .avatar-initials{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 40px;
+    color: var(--verdigris);
+    opacity: 0.85;
+  }
+  .avatar::after{
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(160px 120px at 30% 20%, rgba(63,163,126,0.14), transparent 65%);
+  }
+  .team-card h3{ font-size: 17px; margin-top: 16px; font-weight: 500; }
+  .team-card .role{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--verdigris);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  .team-card p{ color: var(--slate); font-size: 13.5px; margin-top: 8px; }
+
+  /* ---------- QUOTE ---------- */
+  .quote{ text-align: left; max-width: 780px; }
+  .quote blockquote{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 30px);
+    line-height: 1.4;
+    margin: 0;
+    color: var(--paper);
+  }
+  .quote cite{
+    display: block; margin-top: 22px;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--slate);
+  }
+
+  /* ---------- CTA ---------- */
+  .cta{ border-top: 1px solid var(--line); text-align: center; }
+  .cta h2{ font-size: clamp(30px, 4vw, 46px); max-width: 18ch; margin: 0 auto; line-height: 1.12; }
+  .cta p{ color: var(--slate); margin-top: 18px; }
+  .cta-actions{ margin-top: 32px; display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    background: var(--paper);
+    color: var(--ink);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.15s ease, background 0.2s ease;
+  }
+  .btn-primary:hover{ background: #fff; transform: translateY(-1px); }
+  .btn-ghost{
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--slate);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 2px;
+    align-self: center;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-ghost:hover{ color: var(--paper); border-color: var(--paper); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top: 1px solid var(--line); padding: 44px 0; }
+  .footer-grid{ display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+  .footer-brand{ font-family: var(--font-mono); font-size: 13.5px; color: var(--slate); }
+  .footer-links{ display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: 13.5px; }
+  .footer-links a{ color: var(--slate); text-decoration: none; }
+  .footer-links a:hover{ color: var(--paper); }
+  .footer-meta{ font-family: var(--font-mono); font-size: 12px; color: #5C6478; margin-top: 26px; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .origin-grid{ grid-template-columns: 1fr; gap: 40px; }
+    .values-grid{ grid-template-columns: 1fr; }
+    .team-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px){
+    .nav-links{
+      position: fixed; inset: 62px 0 auto 0;
+      background: var(--ink);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 32px 26px;
+      border-bottom: 1px solid var(--line);
+      display: none;
+      gap: 18px;
+    }
+    .nav-links.open{ display: flex; }
+    .nav-toggle{
+      display: inline-flex;
+      background: none; border: none; color: var(--paper);
+      font-family: var(--font-mono); font-size: 13px;
+      cursor: pointer;
+    }
+    .team-grid{ grid-template-columns: 1fr 1fr; gap: 20px; }
+    .footer-grid{ flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#3FA37E" stroke-width="1.6"/>
+        <path d="M12 20.5 L17.5 26 L28.5 14" fill="none" stroke="#3FA37E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      OMNIVERA
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">MENU</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#platform">Platform</a></li>
+      <li><a href="index.html#pipeline">How it works</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Request access</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="wrap page-hero-inner">
+      <p class="eyebrow">About Omnivera Pvt Ltd</p>
+      <h1>We got tired of <em>arguing</em> about whose number was right.</h1>
+      <p class="lede">Omnivera started as a shared spreadsheet three founders kept correcting by hand. It's now the layer that stops that correction from being manual — or necessary.</p>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span class="strip-item">FOUNDED 2023, HYDERABAD</span>
+      <span class="strip-item">14 PEOPLE, 3 TIME ZONES</span>
+      <span class="strip-item">BOOTSTRAPPED THROUGH SEED</span>
+      <span class="strip-item">PRIVATE LIMITED COMPANY</span>
+    </div>
+  </div>
+
+  <!-- ORIGIN -->
+  <section class="origin">
+    <div class="wrap origin-grid">
+      <div class="origin-copy">
+        <p class="eyebrow">Origin</p>
+        <h2>A short, true history.</h2>
+        <p>No invented decades of legacy — Omnivera is young, and we'd rather show the real path than dress it up.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="when">LATE 2022</span>
+          <h3>The spreadsheet problem</h3>
+          <p>Our founders were running ops at three different startups, independently maintaining the same kind of "master" spreadsheet to catch what their tools disagreed on.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">EARLY 2023</span>
+          <h3>Omnivera incorporated</h3>
+          <p>Registered as Omnivera Pvt Ltd with a single goal: make reconciliation a background process, not a Friday-afternoon ritual.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">MID 2023</span>
+          <h3>First verified record</h3>
+          <p>Shipped the first version of the reconciliation engine to three design-partner teams, matching CRM and billing data automatically.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">2024</span>
+          <h3>The seal</h3>
+          <p>Introduced confidence-scored, timestamped "verified records" — the idea that's now central to how the product looks and works.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="when">TODAY</span>
+          <h3>Rolling out early access</h3>
+          <p>A small, deliberately limited group of teams are on Omnivera now, while we harden the platform for a wider release.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2>Three things we don't compromise on.</h2>
+        <p>Not a poster on the wall — the rules that shape what we build and say no to.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <svg class="value-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <path d="M10 16.5 L14 20.5 L22 11" fill="none" stroke="#3FA37E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Show the disagreement</h3>
+          <p>We never quietly pick a winning number. If two systems disagree, the product says so — and shows both.</p>
+        </div>
+        <div class="value-card">
+          <svg class="value-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <path d="M16 8 L16 17 L21 20" fill="none" stroke="#3FA37E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Read-only until asked</h3>
+          <p>Omnivera reads your systems by default. It only ever writes back when a team explicitly turns that on.</p>
+        </div>
+        <div class="value-card">
+          <svg class="value-mark" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="#3FA37E" stroke-width="1.4"/>
+            <path d="M11 16 L15 20 L21 12" fill="none" stroke="#3FA37E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Confidence, not false certainty</h3>
+          <p>A verified record still carries a score. We'd rather say "97% sure" than round up to a comforting 100.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The team</p>
+        <h2>Fourteen people, mostly ex-operators.</h2>
+        <p>Most of us have personally maintained the kind of spreadsheet Omnivera exists to replace.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="avatar"><span class="avatar-initials">A K</span></div>
+          <h3>Arjun Kapoor</h3>
+          <div class="role">Co-founder &amp; CEO</div>
+          <p>Ex-RevOps lead; built the original reconciliation spreadsheet this company replaced.</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar"><span class="avatar-initials">P N</span></div>
+          <h3>Priya Nair</h3>
+          <div class="role">Co-founder &amp; CTO</div>
+          <p>Previously built data infrastructure for a fintech scale-up.</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar"><span class="avatar-initials">S R</span></div>
+          <h3>Sameer Reddy</h3>
+          <div class="role">Co-founder &amp; Head of Product</div>
+          <p>Spent six years in finance ops before switching to building tools for it.</p>
+        </div>
+        <div class="team-card">
+          <div class="avatar"><span class="avatar-initials">M I</span></div>
+          <h3>Meera Iyer</h3>
+          <div class="role">Head of Customer Success</div>
+          <p>Works directly with every design-partner team during onboarding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section>
+    <div class="wrap">
+      <div class="quote">
+        <blockquote>"We didn't want to build another dashboard. We wanted the thing underneath every dashboard to stop lying by accident."</blockquote>
+        <cite>— Arjun Kapoor, Co-founder &amp; CEO</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>Curious what a verified record looks like for your team?</h2>
+      <p>We're onboarding a limited number of teams this quarter.</p>
+      <div class="cta-actions">
+        <a href="index.html#contact" class="btn-primary">Request early access</a>
+        <a href="index.html#verify" class="btn-ghost">See the demo</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">OMNIVERA PVT LTD<br>Operational truth, verified.</div>
+      <ul class="footer-links">
+        <li><a href="index.html#platform">Platform</a></li>
+        <li><a href="index.html#pipeline">How it works</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">© <span id="year"></span> Omnivera Pvt Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
